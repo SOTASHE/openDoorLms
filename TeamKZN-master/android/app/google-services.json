@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "537140865669",
+    "firebase_url": "https://natalgeek-eebd6.firebaseio.com",
+    "project_id": "natalgeek-eebd6",
+    "storage_bucket": "natalgeek-eebd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537140865669:android:0c9625262d8d772b9d97ec",
+        "android_client_info": {
+          "package_name": "com.teamnatal.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537140865669-r9g8dhfk97h4nvcutant7vkhagobg0fq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamnatal.student",
+            "certificate_hash": "2f5b6568cc87ec1d40069925f3a1e137b1dae1f5"
+          }
+        },
+        {
+          "client_id": "537140865669-rjrh3hedg741hgbajiritpduvc6hoege.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNPr9XbBaTDcRkQrjnn6R9zBt4ewYPg3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "537140865669-rjrh3hedg741hgbajiritpduvc6hoege.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
