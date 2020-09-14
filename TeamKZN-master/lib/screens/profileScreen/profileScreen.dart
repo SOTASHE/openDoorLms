@@ -5,13 +5,16 @@ Student Profile  Screen
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:provider/provider.dart';
 import 'package:student/models/userProfile.dart';
 import 'package:student/screens/profileScreen/academicInfo.dart';
 import 'package:student/services/auth.dart';
 import 'package:student/services/models.dart';
+import 'package:student/shared/main_drawer.dart';
 
 import 'gameInfo.dart';
+import 'personalInfo.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -24,6 +27,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     final AuthService auth = AuthService();
     Report report = Provider.of<Report>(context);
     FirebaseUser user = Provider.of<FirebaseUser>(context);
@@ -31,11 +36,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: MainAppDrawer(),
+
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         toolbarHeight: MediaQuery.of(context).size.height/9,
-        leading: IconButton(icon: Icon(Icons.menu), color: Colors.black),
+        leading: IconButton(
+            icon: Icon(Icons.menu),
+            color: Colors.black,
+            onPressed: (){_scaffoldKey.currentState.openDrawer();},),
         centerTitle: true,
 
         title: Text(
@@ -52,25 +62,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
 
             //Profile
-            GFListTile(
 
-              avatar: GFAvatar(
-                //  backgroundImage: NetworkImage(user.photoUrl),
+            GFAvatar(
+                backgroundImage: NetworkImage(user.photoUrl ?? "https://avatarfiles.alphacoders.com/105/105223.jpg"),
                 maxRadius: 55,
+                shape: GFAvatarShape.standard ,
               ),
-
-              title: Text(user.displayName ??"Guests"),
-              subtitleText: "Grade ${currentUser.getUserGrade()}",
-              description: Text(
-                currentUser.getUserSchool(),
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-
-              margin: EdgeInsets.only(left: 10,right: 10),
-
-            ),
 
 
             Expanded(
@@ -112,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     body: TabBarView(
                       children: [
-                        Container(),
+                        PersonalInfoScreen(user: user,),
                         AcademicInfoScreen(user: user),
                         GameInfoDisplay(user: user, report: report,),
                       ],

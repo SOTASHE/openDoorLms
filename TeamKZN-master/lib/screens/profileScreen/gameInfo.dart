@@ -21,7 +21,7 @@ class _GameInfoDisplayState extends State<GameInfoDisplay> {
   dynamic _leadPos = 0;
   dynamic checkLeaderboard(){
     if (widget.user.displayName == null){
-      return  "Not Availble";
+      return  "Not Available";
     }
     else{
       return _leadPos;
@@ -31,28 +31,40 @@ class _GameInfoDisplayState extends State<GameInfoDisplay> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(10),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
 
           //Leadear board
-          GFTypography(
-            text: "Leaderboard : ${checkLeaderboard()}",
-            icon: Icon(Icons.leaderboard),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GFTypography(
+              text: "Leaderboard : ${checkLeaderboard()}",
+              icon: Icon(Icons.leaderboard),
+            ),
           ),
 
           //Completd Quizzes
-          GFTypography(
-            text: "Completed Quizzes : ${widget.report.total ?? 0 }",
-            icon: Icon(Icons.gamepad_outlined),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GFTypography(
+              text: "Completed Quizzes : ${widget.report.total ?? 0 }",
+              icon: Icon(Icons.gamepad_outlined),
 
+            ),
           ),
 
-          GFTypography(
-            text: "Challenges Completed : ${ 0 }",
-            icon: Icon(Icons.change_history),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GFTypography(
+              text: "Challenges Completed : ${ 0 }",
+              icon: Icon(Icons.change_history),
 
+            ),
           )
         ],
       ),
