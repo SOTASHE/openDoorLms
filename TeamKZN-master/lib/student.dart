@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
-import 'package:student/screens/announcementScreen/announcementScreen.dart';
-import 'package:student/screens/assignmentScreen/assignmentScreen.dart';
-import 'package:student/screens/classesScreen.dart';
-import 'package:student/screens/gameScreen.dart';
-import 'package:student/screens/homeScreen/homeScreen.dart';
-import 'package:student/screens/pastExamPapers/examPapersScreen.dart';
-import 'package:student/screens/studyMaterialScreen.dart';
+import 'screens/announcementScreen/announcementScreen.dart';
+import 'screens/assignmentScreen/assignmentScreen.dart';
+import 'screens/classesScreen.dart';
+import 'screens/gameScreen.dart';
+import 'screens/homeScreen/homeScreen.dart';
+import 'screens/pastExamPapers/examPapersScreen.dart';
+import 'screens/studyMaterialScreen.dart';
 
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';

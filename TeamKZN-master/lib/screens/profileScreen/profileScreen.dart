@@ -2,16 +2,33 @@
 Student Profile  Screen
  */
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:provider/provider.dart';
 import 'package:student/models/userProfile.dart';
+import 'package:student/screens/profileScreen/academicInfo.dart';
+import 'package:student/services/auth.dart';
+import 'package:student/services/models.dart';
 
-class ProfileScreen extends StatelessWidget {
+import 'gameInfo.dart';
 
+class ProfileScreen extends StatefulWidget {
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   User currentUser = User.fetchUser();
 
   @override
   Widget build(BuildContext context) {
+    final AuthService auth = AuthService();
+    Report report = Provider.of<Report>(context);
+    FirebaseUser user = Provider.of<FirebaseUser>(context);
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -22,12 +39,12 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
 
         title: Text(
-            "My Profile",
-        style: TextStyle(
-          color: Colors.blue
-            ),
+          "My Profile",
+          style: TextStyle(
+              color: Colors.blue
           ),
         ),
+      ),
 
 
       body: Container(
@@ -36,19 +53,23 @@ class ProfileScreen extends StatelessWidget {
 
             //Profile
             GFListTile(
+
               avatar: GFAvatar(
-                backgroundImage: AssetImage(currentUser.getUserImage()),
+                //  backgroundImage: NetworkImage(user.photoUrl),
                 maxRadius: 55,
               ),
 
-              titleText: currentUser.getUserName(),
+              title: Text(user.displayName ??"Guests"),
               subtitleText: "Grade ${currentUser.getUserGrade()}",
               description: Text(
-                  currentUser.getUserSchool(),
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-              ),) ,
-              margin: EdgeInsets.all(10),
+                currentUser.getUserSchool(),
+                style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+
+              margin: EdgeInsets.only(left: 10,right: 10),
+
             ),
 
 
@@ -59,45 +80,45 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10.0))
                 ),
                 child: DefaultTabController(
-                length: 3,
-                child: new Scaffold(
-                  appBar: new PreferredSize(
-                    preferredSize: Size.fromHeight(kToolbarHeight),
+                  length: 3,
+                  child: new Scaffold(
+                    appBar: new PreferredSize(
+                      preferredSize: Size.fromHeight(kToolbarHeight),
 
-                    child: Container(
-                      height: 50.0,
+                      child: Container(
+                        height: 50.0,
 
 
-                      child: new TabBar(
-                        labelColor: Colors.white,
-                        unselectedLabelColor: Colors.blueGrey,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicator: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15),
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),),
-                            color: Colors.blue
+                        child: new TabBar(
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Colors.blueGrey,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),),
+                              color: Colors.blue
+                          ),
+
+                          tabs: [
+                            Tab(child:Text("Personal Information")),
+                            Tab(child: Text("Academic Data"),),
+                            Tab(child: Text("Game Board")),
+                          ],
                         ),
-
-                        tabs: [
-                          Tab(child:Text("Personal Information")),
-                          Tab(child: Text("Academic Data"),),
-                          Tab(child: Text("Game Board")),
-                        ],
                       ),
                     ),
-                  ),
-                  body: TabBarView(
-                    children: [
-                      Container(),
-                      Icon(Icons.directions_transit),
-                      Icon(Icons.directions_bike),
-                    ],
+                    body: TabBarView(
+                      children: [
+                        Container(),
+                        AcademicInfoScreen(user: user),
+                        GameInfoDisplay(user: user, report: report,),
+                      ],
+                    ),
                   ),
                 ),
-              ),
               ),
             ),
           ],
