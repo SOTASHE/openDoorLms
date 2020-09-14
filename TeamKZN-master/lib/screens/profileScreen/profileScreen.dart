@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
     final AuthService auth = AuthService();
     Report report = Provider.of<Report>(context);
@@ -42,10 +42,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         toolbarHeight: MediaQuery.of(context).size.height/9,
-        leading: IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.black,
-            onPressed: (){_scaffoldKey.currentState.openDrawer();},),
+        leading: Builder(
+          builder:(context) => IconButton(
+              icon: Icon(Icons.menu),
+              color: Colors.black,
+              onPressed: ()=>Scaffold.of(context).openDrawer(),),
+        ),
         centerTitle: true,
 
         title: Text(
